@@ -16,16 +16,22 @@ export PATH=$PATH:$GOPATH/bin
 ```
 
 2. Install Sample
-curl 이용해 제일 최신 버전의 fabric-sample 받아오기
 
+curl 이용해 제일 최신 버전의 fabric-sample 받아오기
+<fabric 버전> <fabric-ca 버전> <thirdparty 버전>: -- 뒤에 붙을 것, -- 부터 없으면 최신버전 가져옴.
 ```bash
-curl -sSL https://bit.ly/2ysbOFE | bash -s
+curl -sSL https://bit.ly/2ysbOFE | bash -s -- 2.0.0 1.4.4 0.4.18
 export PATH=<path to download location>/bin$PATH
 ```
 
 3. First Sample - test network
+
 channel이 default(mychannel)이 아닌경우 -c 옵션이 붙어야함.
+
 channel 이름은 소문자만.
+
+
+1개의 orderer 노드와 2개의 peer 노드를 생성할 수 있음. 이전에 수행한 적이 있다면 ./network.sh down 수행
 
 ```bash
 cd fabric-samples/test-network
@@ -35,6 +41,7 @@ cd fabric-samples/test-network
 ./network.sh deployCC -c beomschannel
 ```
 
+실제 프로젝트에서는 ordering 노드가 여러개가 되며 ordering 노드들은 Raft 합의 알고리즘 사용해 block 생성하고 블록체인을 하나의 체인으로 유지.
 
 ```bash
 export PATH=${PWD}/../bin:${PWD}:$PATH
@@ -87,7 +94,7 @@ peer chaincode query -C beomschannel -n fabcar -c '{"Args":["queryAllCars"]}'
 ./network.sh up
 ```
 
-- cryptogen 통해 시간은 좀 걸리지면 Certificate Authorities (CAs)도 생성 가능
+- cryptogen 통해 시간은 좀 걸리지만 Certificate Authorities (CAs)도 생성 가능
 ```bash
 ./network.sh up -ca
 ```
