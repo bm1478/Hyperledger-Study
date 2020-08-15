@@ -15,6 +15,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "class-transformer": "^0.2.3"
+    "class-transformer": "^0.3.1"
   }
 }
