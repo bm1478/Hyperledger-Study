@@ -1,27 +1,53 @@
 # Setting & 1st Example
 
-(Mac OS 기준, hyperledger-fabric 공식 레퍼런스 참조)
+(Ubuntu 18.04 기준, 현재 하드웨어: 메모리 2GB, 용량 10GB)
+
+hyperledger-fabric 공식 레퍼런스 참조 (https://hyperledger-fabric.readthedocs.io/en/release-2.2)
 
 1. Prerequisites
 
-Git, cURL, wget, docker(version 17.06.2 이상), docker-compose(version 1.14.0 이상), Go(version 1.13.x 이상), Node.js(version 10.15.3 이상), Python(version 2.7)
+Git, cURL, wget, docker(version 17.06.2 ce 이상), docker-compose(version 1.14.0 이상), Go(version 1.13.x 이상), Node.js(version 10.15.3 이상), Python(version 2.7)
 
+- Git 설치:
 ```shell script
-brew install wget
-docker --version
-docker-compose --version
-go version
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+sudo add-apt-repository ppa:git-core/ppa
+sudo apt-get update && sudo apt-get dist-upgrade
+sudo apt-get install git-core
+git version
 ```
+- cURL 설치
+```shell script
+sudo apt-get install -y curl
+curl --version
+```
+
+- Docker & Docker compose 설치
+```shell script
+sudo apt-get update && sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get update && sudo apt-cache search docker-ce
+sudo apt-get update && sudo apt-get install docker-ce
+sudo usermod -aG docker $USER
+sudo service docker restart
+docker --version
+sudo systemctl start docker
+sudo systemctl enable docker
+
+sudo curl -L https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+```
+마지막에서 네 번째 문장은 시스템 실행될때 도커 키기 위함.
 
 2. Install Sample
 
-curl 이용해 제일 최신 버전의 fabric-sample 받아오기
+curl 이용해 제일 최신 버전의 fabric-sample 과 하이퍼레저 패브릭 바이너리 파일 받아오기
 
-<fabric 버전> <fabric-ca 버전> <thirdparty 버전>: -- 뒤에 붙을 것, -- 부터 없으면 최신버전 가져옴.
+<fabric 버전> <fabric-ca 버전>: -- 뒤에 붙을 것, -- 부터 없으면 최신버전 가져옴.
 ```shell script
-curl -sSL https://bit.ly/2ysbOFE | bash -s -- 2.0.0 1.4.4 0.4.18
+curl -sSL https://bit.ly/2ysbOFE | bash -s
+curl -sSL https://bit.ly/2ysbOFE | bash -s -- 2.2.0 1.4.7
 export PATH=<path to download location>/bin$PATH
 ```
 
