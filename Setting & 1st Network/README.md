@@ -29,7 +29,7 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 sudo apt-get update && sudo apt-cache search docker-ce
 sudo apt-get update && sudo apt-get install docker-ce
 sudo usermod -aG docker $USER
-sudo service docker restart
+sudo service docker restart (or sudo chmod 666 /var/run/docker.sock)
 docker --version
 sudo systemctl start docker
 sudo systemctl enable docker
@@ -39,6 +39,36 @@ sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 ```
 마지막에서 네 번째 문장은 시스템 실행될때 도커 키기 위함.
+
+- Node.js & npm 설치
+```shell script
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# update 시
+sudo npm cache clean -f 
+sudo npm install -g n 
+sudo n stable
+
+sudo curl -L https://npmjs.org/install.sh | sh
+sudo npm update -g npm
+```
+
+- Go 설치
+```shell script
+mkdir golang && cd golang
+wget https://dl.google.com/go/go1.14.linux-amd64.tar.gz
+
+sudo tar -zxvf go1.12.9.linux-amd64.tar.gz -C /usr/local
+export PATH=$PATH:/usr/local/go/bin
+go version
+go env
+
+vim .bashrc
+# export PATH=$PATH:/usr/local/go/bin
+# export GOPATH=$HOME/go 입력
+source .bashrc
+```
 
 2. Install Sample
 
@@ -59,6 +89,7 @@ channel 이름은 소문자만.
 
 1개의 orderer 노드와 2개의 peer 노드를 생성할 수 있음. 이전에 수행한 적이 있다면 ./network.sh down 수행
 
+각 Org마다 Peer 1개씩 가지고 있음. 피어들이 트랜잭션을 생성하고, 블록에 넣지만 순서는 Ordering node가 진행
 ```shell script
 cd fabric-samples/test-network
 ./network.sh down
@@ -76,7 +107,6 @@ export FABRIC_CFG_PATH=${PWD}/../config/
 
 ```shell script
 # Environment variables for Org1
-
 export CORE_PEER_TLS_ENABLED=true
 export CORE_PEER_LOCALMSPID="Org1MSP"
 export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
