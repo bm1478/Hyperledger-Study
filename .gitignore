@@ -1,3 +1,3 @@
 .idea
-chaincode/message/javascript/node_modules/
-My App/node_modules/
+etc/chaincode/message/javascript/node_modules/
+etc/My App/node_modules/
