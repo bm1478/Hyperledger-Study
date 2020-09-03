@@ -4,7 +4,7 @@
 
 1. Prerequisites
 
-Fabric Test Network / Docker /Docker Compose
+Fabric Test Network / Docker / Docker Compose
 
 2. 명령어 (실패)
 ```shell script
@@ -61,9 +61,9 @@ sudo service postgresql start
 sudo service postgresql stop
 
 sudo passwd postgres
-sudo service postgresql start
 sudo -u postgres psql
-alter user postgres with password '1234' 로 비밀번호 설정 해줘야함.
+alter user postgres with password '1234'
+# 로 비밀번호 설정 해줘야함.
 
 # postgres=# CREATE DATABASE fabricexplorer OWNER postgres
 # \q 입력시 나감.
