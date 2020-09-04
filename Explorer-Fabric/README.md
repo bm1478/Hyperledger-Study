@@ -6,12 +6,14 @@
 
 Fabric Test Network / Docker / Docker Compose
 
-2. 명령어 (실패)
+2. 명령어
 ```shell script
 wget https://raw.githubusercontent.com/hyperledger/blockchain-explorer/master/examples/net1/config.json
 wget https://raw.githubusercontent.com/hyperledger/blockchain-explorer/master/examples/net1/connection-profile/first-network.json -P connection-profile
 wget https://raw.githubusercontent.com/hyperledger/blockchain-explorer/master/docker-compose.yaml
-cp -r ../fabric-samples/test-network/organizations/ organizations
+# 이미 네트워크 실행된 상태여야함
+cp -r ../fabric-samples/test-network/organizations/peerOrganizations organizations/peerOrganizations
+cp -r ../fabric-samples/test-network/organizations/ordererOrganizations organizations/ordererOrganizations
 ```
 
 docker compose.yaml 이 부분 수정 (네트워크 이름, volume 컨테이너에 맞게)
